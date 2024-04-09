@@ -1,11 +1,15 @@
 import "./SongsList.scss"
-imrpto
+import SongCard from "../SongCard/SongCard"
 
-function SongsList() {
+function SongsList({ songs }) {
   return (
-    <ul className="songs-list">
-
-    </ul>
+    <>
+      <ul className="songs-list">
+        {songs.map((song) => (
+          <SongCard song={song} key={song} />
+        ))}
+      </ul>
+    </>
   )
 }
 
