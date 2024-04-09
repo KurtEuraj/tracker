@@ -1,10 +1,10 @@
 import "./Hero.scss"
 import SearchBar from "../SearchBar/SearchBar"
 
-function Hero() {
+function Hero({ handleSearch }) {
   return (
     <div className="hero">
-        <SearchBar />
+        <SearchBar handleSearch={handleSearch}/>
     </div>
   )
 }
