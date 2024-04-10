@@ -8,6 +8,17 @@ import axios from "axios"
 function App() {
 
   const [songs, setSongs] = useState([])
+  const [searchResults, setSearchResults] = useState([])
+
+  const updateSearchTerm = async (e) => {
+    if (e.target.value) {
+      const reqBody = {
+        search: e.target.value
+      }
+      const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks/search`, reqBody)
+      setSearchResults(response.data)
+    }
+  }
 
   const handleSearch = async (e) => {
     e.preventDefault()
@@ -24,7 +35,7 @@ function App() {
     <div className="App">
       {/* <Header /> */}
       <main>
-        <Hero handleSearch={handleSearch} />
+        <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} />
         <SongsList songs={songs} />
       </main>
     </div>
