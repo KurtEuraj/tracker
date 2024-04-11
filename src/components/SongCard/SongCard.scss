@@ -1,2 +1,14 @@
 @use "../../styles/partials/variables" as *;
 @use "../../styles/partials/mixins" as *;
+
+.song-card {
+    height: 5rem;
+    &__iframe {
+        width: 100%;
+        height: 100%;
+    }
+
+    @include tablet {
+        height: 22rem;
+    }
+}
