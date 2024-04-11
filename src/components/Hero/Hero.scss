@@ -1,0 +1,21 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.hero {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    padding: 3rem 0;
+    margin: $mobile-container;
+    border-bottom: 1px solid $white;
+
+
+    @include tablet {
+        padding: 5rem 0;
+        margin: $tablet-container;
+    }
+
+    @include desktop {
+        margin: $desktop-container;
+    }
+}
