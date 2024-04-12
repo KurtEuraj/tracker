@@ -10,9 +10,17 @@ function App() {
   const [songs, setSongs] = useState([])
   const [searchResults, setSearchResults] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [query, setQuery] = useState("")
+
+  const handleSongsSuggestion = (result) => {
+    const searchStr = `${result.song} by ${result.artists}`
+    setQuery(searchStr)
+  }
 
   const updateSearchTerm = async (e) => {
-    if (e.target.value) {
+    setSongs([])
+    setQuery(e.target.value)
+    if (query) {
       const reqBody = {
         search: e.target.value
       }
@@ -38,8 +46,8 @@ function App() {
     <div className="App">
       {/* <Header /> */}
       <main>
-        <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} />
-        <SongsList songs={songs} isLoading={isLoading}/>
+        <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query}/>
+        <SongsList songs={songs} isLoading={isLoading} />
       </main>
     </div>
   );
