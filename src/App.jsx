@@ -7,7 +7,7 @@ import axios from "axios"
 
 function App() {
 
-  const [songs, setSongs] = useState([])
+  const [songId, setSongId] = useState("")
   const [searchResults, setSearchResults] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState("")
@@ -18,7 +18,6 @@ function App() {
   }
 
   const updateSearchTerm = async (e) => {
-    setSongs([])
     setQuery(e.target.value)
     if (query) {
       const reqBody = {
@@ -32,13 +31,13 @@ function App() {
   const handleSearch = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    setSongs([])
+    setSongId("")
     const songToSearch = e.target.song.value
     const reqBody = {
       song: songToSearch
     }
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks`, reqBody)
-    setSongs(response.data)
+    setSongId(response.data)
     setIsLoading(false)
   }
 
@@ -47,7 +46,7 @@ function App() {
       {/* <Header /> */}
       <main>
         <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query}/>
-        <SongsList songs={songs} isLoading={isLoading} />
+        <SongsList songId={songId} isLoading={isLoading} query={query} />
       </main>
     </div>
   );
