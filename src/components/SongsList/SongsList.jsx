@@ -2,7 +2,7 @@ import "./SongsList.scss"
 import SongCard from "../SongCard/SongCard"
 import loader from "../../assets/images/loader.svg"
 
-function SongsList({ songs, isLoading }) {
+function SongsList({ songId, isLoading, query }) {
   if (isLoading) {
     return (
       <div className="loader">
@@ -10,15 +10,17 @@ function SongsList({ songs, isLoading }) {
       </div>
     )
   }
+
+  else if (!songId) {
+    return (<></>)
+  }
+
   else {
     return (
-      <>
-        <ul className="songs-list">
-          {songs.map((song) => (
-            <SongCard song={song} key={song} />
-          ))}
-        </ul>
-      </>
+      <div className="songs-list">
+        {/* <p>Results for {query}</p> */}
+        <SongCard songId={songId} />
+      </div>
     )
   }
 }

@@ -1,20 +1,13 @@
 import "./SongCard.scss"
 
-function SongCard({ song }) {
+function SongCard({ songId }) {
 
-  const iFrameURL = `https://open.spotify.com/embed/track/${song}?utm_source=generator`
-
-  const errorText = document.querySelector("body > pre")
+  const iFrameURL = `https://open.spotify.com/embed/track/${songId}?utm_source=generator`
 
   return (
-    <>
-      {errorText?.innerHTML === "upstream request timeout" ? (
-        null
-      ) :
-        (<div className="song-card">
-          <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        </div>)}
-    </>
+    <div className="song-card">
+      <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
   )
 }
 
