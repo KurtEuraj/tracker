@@ -6,17 +6,25 @@
     margin-top: 3rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
-    margin-bottom: 3rem;
 
     @include tablet {
-        flex-direction: row;
-        flex-wrap: wrap;
         margin: $tablet-container;
         margin-top: 5rem;
         margin-bottom: 5rem;
         gap: 3rem;
         justify-content: center;
+    }
+
+    &__heading {
+        @include mobile-heading;
+        color: $white;
+        text-align: center;
+
+        @include tablet {
+            @include desktop-heading;
+        }
     }
 }
 
