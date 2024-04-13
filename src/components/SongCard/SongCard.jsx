@@ -9,7 +9,6 @@ function SongCard({ song, handleNextSong }) {
     iFrame = <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
   } catch (error) {
     console.error(error)
-    console.log("Aha Caught You!!")
   }
 
   return (

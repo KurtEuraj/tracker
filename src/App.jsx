@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import './App.scss';
-import Header from "./components/Header/Header"
 import Hero from './components/Hero/Hero';
 import SongsList from './components/SongsList/SongsList';
 import axios from "axios"
@@ -66,7 +65,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Header /> */}
       <main>
         <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query} />
         <SongsList song={song} isLoading={isLoading} savedQuery={savedQuery} handleNextSong={handleNextSong}/>
