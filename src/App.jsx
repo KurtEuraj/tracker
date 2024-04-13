@@ -7,14 +7,21 @@ import axios from "axios"
 
 function App() {
 
-  const [songId, setSongId] = useState("")
+  const [song, setSong] = useState({})
   const [searchResults, setSearchResults] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [query, setQuery] = useState("")
+  const [savedQuery, setSavedQuery] = useState("")
 
   const handleSongsSuggestion = (result) => {
     const searchStr = `${result.song} by ${result.artists}`
     setQuery(searchStr)
+  }
+
+  const updateHistory = (songName) => {
+    let history = sessionStorage.getItem("history") || ""
+    const updatedHistory = history += `${songName}, `
+    sessionStorage.setItem("history", updatedHistory)
   }
 
   const updateSearchTerm = async (e) => {
@@ -31,13 +38,29 @@ function App() {
   const handleSearch = async (e) => {
     e.preventDefault()
     setIsLoading(true)
-    setSongId("")
+    setSong({})
     const songToSearch = e.target.song.value
+    setSavedQuery(songToSearch)
     const reqBody = {
-      song: songToSearch
+      song: songToSearch,
+      history: sessionStorage.getItem("history") || ""
     }
     const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks`, reqBody)
-    setSongId(response.data)
+    updateHistory(response.data.songName)
+    setSong(response.data)
+    setIsLoading(false)
+  }
+
+  const handleNextSong = async () => {
+    setIsLoading(true)
+    setSong({})
+    const reqBody = {
+      song: savedQuery,
+      history: sessionStorage.getItem("history") || ""
+    }
+    const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks`, reqBody)
+    updateHistory(response.data.songName)
+    setSong(response.data)
     setIsLoading(false)
   }
 
@@ -45,8 +68,8 @@ function App() {
     <div className="App">
       {/* <Header /> */}
       <main>
-        <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query}/>
-        <SongsList songId={songId} isLoading={isLoading} query={query} />
+        <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query} />
+        <SongsList song={song} isLoading={isLoading} savedQuery={savedQuery} handleNextSong={handleNextSong}/>
       </main>
     </div>
   );
