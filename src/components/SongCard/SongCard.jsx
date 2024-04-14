@@ -5,8 +5,7 @@ function SongCard({ song, handleNextSong }) {
   const iFrameURL = `https://open.spotify.com/embed/track/${song.songId}?utm_source=generator`
   let iFrame = ""
   try {
-    <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-    iFrame = <iframe className="song-card__iframe" src={iFrameURL} title="Spotify track playback and controls" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    iFrame = <iframe className="song-card__iframe" title="Song playback and controls" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
   } catch (error) {
     console.error(error)
   }
