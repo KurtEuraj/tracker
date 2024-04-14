@@ -6,7 +6,7 @@ function SongCard({ song, handleNextSong }) {
   let iFrame = ""
   try {
     <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
-    iFrame = <iframe className="song-card__iframe" src={iFrameURL} frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    iFrame = <iframe className="song-card__iframe" src={iFrameURL} title="Spotify track playback and controls" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
   } catch (error) {
     console.error(error)
   }
