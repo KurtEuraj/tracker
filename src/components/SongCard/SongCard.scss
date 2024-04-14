@@ -2,7 +2,14 @@
 @use "../../styles/partials/mixins" as *;
 
 .song-card {
-    height: 5rem;
+    height: 10rem;
+    margin-bottom: 5rem;
+    width: 100%;
+
+    @include tablet {
+        margin-bottom: 10rem;
+    }
+
     &__iframe {
         width: 100%;
         height: 100%;
@@ -10,5 +17,42 @@
 
     @include tablet {
         height: 22rem;
+        width: 50rem;
+    }
+
+    &__bottom {
+        background-color: $black;
+        position: relative;
+        bottom: 1rem;
+        padding: 1rem;
+        border-bottom-left-radius: .75rem;
+        border-bottom-right-radius: .75rem;
+        display: flex;
+        justify-content: center;
+
+        @include tablet {
+            justify-content: end;
+        }
+    }
+
+    &__next-button {
+        @include mobile-body;
+        background-color: $white;
+        width: fit-content;
+        padding: .5rem 1rem;
+        border-radius: 32px;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+        &:hover {
+            background-color: $tracker-purple;
+            color: $white;
+        }
+
+        @include tablet {
+            @include desktop-body;
+        }
     }
 }

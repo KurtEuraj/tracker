@@ -2,7 +2,7 @@ import "./SongsList.scss"
 import SongCard from "../SongCard/SongCard"
 import loader from "../../assets/images/loader.svg"
 
-function SongsList({ songs, isLoading }) {
+function SongsList({ song, isLoading, savedQuery, handleNextSong }) {
   if (isLoading) {
     return (
       <div className="loader">
@@ -10,15 +10,17 @@ function SongsList({ songs, isLoading }) {
       </div>
     )
   }
+
+  else if (!song.songId) {
+    return (<></>)
+  }
+
   else {
     return (
-      <>
-        <ul className="songs-list">
-          {songs.map((song) => (
-            <SongCard song={song} key={song} />
-          ))}
-        </ul>
-      </>
+      <div className="songs-list">
+        <h2 className="songs-list__heading">Discover Similar Tracks to: "{savedQuery}"</h2>
+        <SongCard song={song} handleNextSong={handleNextSong} />
+      </div>
     )
   }
 }

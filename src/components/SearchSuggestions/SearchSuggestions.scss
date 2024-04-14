@@ -1,0 +1,36 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.search-results {
+    padding: 0.5rem;
+    background-color: $black;
+    width: 100%;
+    max-width: 30rem;
+    position: relative;
+    bottom: 2rem;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding-top: 2rem;
+    height: 15rem;
+    overflow-y: scroll;
+    scrollbar-width: none;
+
+    &__item {
+        border-bottom: 1px solid $grey;
+        padding: 1rem;
+        color: $tracker-purple;
+        cursor: pointer;
+        @include mobile-body;
+
+        &:last-child {
+            border: none;
+        }
+    }
+
+    &__artist {
+        @include mobile-label;
+    }
+}

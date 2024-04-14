@@ -13,12 +13,28 @@
 }
 
 // mobile text styles
+@mixin mobile-label {
+    font-size: .75rem;
+    font-weight: 300;
+}
+
 @mixin mobile-body {
     font-size: 1rem;
     font-weight: 400;
 }
 
+@mixin mobile-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+// desktop text styles
 @mixin desktop-body {
     font-size: 1.2rem;
     font-weight: 400;
+}
+
+@mixin desktop-heading {
+    font-size: 1.5rem;
+    font-weight: 700;
 }
