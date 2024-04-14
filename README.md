@@ -1,70 +1,130 @@
-# Getting Started with Create React App
+# Project Title
+Tracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+Tracker provides users with personalized song suggestions based on their favorite tracks.
 
-In the project directory, you can run:
+### Problem
 
-### `npm start`
+Many music streaming platforms offer recommendation systems based on genres or popularity, but they don't always find songs that the user
+already discovered. Tracker aims to address this by providing songs recommendations using AI and blacklisting songs users already know.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### User Profile
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- music enthusiasts:
+    - looking to discover new songs similar to their favorites
+    - save new songs to their spotify
 
-### `npm test`
+### Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- As a user, I want to be able to find new songs similar to my current favorite tracks
+- As a user, I want to be able to save new songs to my spotify
+- As a user, I want to be able to listen to new songs 
 
-### `npm run build`
+## Implementation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Tech Stack
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- React
+- Express
+- Client libraries: 
+    - react
+    - axios
+    - sass
+- Server libraries:
+    - express
+    - openAi
+    - axios
+    - cors
+    - dotenv
+    - nodemon
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+### APIs
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Spotify Web API for song information
+- OpenAi GPT API for generating song recommendations 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Sitemap
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Main Page
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Mockups
 
-## Learn More
+#### Main Page
+![](readMeImages/home.jpg)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Endpoints
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**POST /tracks**
 
-### Code Splitting
+- Receive user input, call OpenAI API, and return recommended tracks
+- GPT API will take in the song name, the artist and the list of the user’s blacklisted songs
+- Responds with songs that match the vibe or sound
+- Spotify API takes the song name and artist from the GPT response
+- Responds with song data
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+Parameters:
+- Song/Artist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Response:
+```
+{
+    "songId": "6vN77lE9LK6HP2DewaN6HZ",
+    "songName": "Track Name"
+}
+```
 
-### Making a Progressive Web App
+**POST /tracks/search**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Receives search query
+- Finds songs from that query using the Spotify API
 
-### Advanced Configuration
+Parameters:
+- Song/Artist
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Response:
+```
+{
+    "song": "track name",
+    "artists": "track artists"
+}
+```
 
-### Deployment
+## Roadmap
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+- Create server
+    - express project with routing, with placeholder 200 responses
 
-### `npm run build` fails to minify
+- Integrate Spotify API for song data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Integrate OpenAI GPT API for song recommendations.
+
+- Create client
+
+- Implement UI for displaying recommended tracks
+
+- Implement playback functionality using the Spotify Iframe
+
+- Allow users to search for songs
+
+- Allow users to add tracks to liked songs
+
+- Bug fixes
+
+## Nice-to-haves
+
+- Spotify authentication
+- Save users to a database
+- Blacklist feature that filters out songs the user already knows
+- Custom built song widgets using the Spotify Web Playback SDK
+
+## Future Implementations
+
+- Additional filters (genre, mood)
+- Filter that prevents the same artist to appear in results
+- Manage user playlists within the app itself
+- Apple music integration
+
