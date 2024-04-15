@@ -19,7 +19,7 @@ function SongsList({ song, isLoading, savedQuery, handleNextSong }) {
     return (
       <div className="songs-list">
         <h2 className="songs-list__heading">Discover Similar Tracks to: "{savedQuery}"</h2>
-        <SongCard song={song} handleNextSong={handleNextSong} />
+        <SongCard songId={song.songId} handleNextSong={handleNextSong} next={true}/>
       </div>
     )
   }
