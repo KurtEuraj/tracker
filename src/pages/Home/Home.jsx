@@ -16,10 +16,13 @@ function Home() {
         setQuery(searchStr)
     }
 
-    const updateHistory = (songName) => {
+    const updateHistory = (songName, songId) => {
         let history = sessionStorage.getItem("history") || ""
+        let historyIDs = sessionStorage.getItem("historyIDs") || ""
         const updatedHistory = history += `${songName}, `
+        const updatedHistoryIDs = historyIDs += `${songId},`
         sessionStorage.setItem("history", updatedHistory)
+        sessionStorage.setItem("historyIDs", updatedHistoryIDs)
     }
 
     const updateSearchTerm = async (e) => {
@@ -44,7 +47,7 @@ function Home() {
             history: sessionStorage.getItem("history") || ""
         }
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks`, reqBody)
-        updateHistory(response.data.songName)
+        updateHistory(response.data.songName, response.data.songId)
         setSong(response.data)
         setIsLoading(false)
     }
@@ -57,7 +60,7 @@ function Home() {
             history: sessionStorage.getItem("history") || ""
         }
         const response = await axios.post(`${process.env.REACT_APP_SERVER_URL}/tracks`, reqBody)
-        updateHistory(response.data.songName)
+        updateHistory(response.data.songName, response.data.songId)
         setSong(response.data)
         setIsLoading(false)
     }
