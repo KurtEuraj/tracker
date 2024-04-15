@@ -128,3 +128,8 @@ Response:
 - Manage user playlists within the app itself
 - Apple music integration
 
+## Steps to Deploy
+- Create a Spotify "app" using your Spotify Credentials. More info here: https://developer.spotify.com/documentation/web-api/concepts/apps
+- Get your Spotify app's client id and client secret
+- Get an API key from Open AI: https://platform.openai.com/api-keys
+- Replace the values in .env.sample with your credentials
