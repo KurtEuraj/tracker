@@ -19,7 +19,7 @@ function History() {
         <main className="history">
             {history != null ? (history.map((songId) => (
                 <SongCard songId={songId} key={songId} next={false} size="sm"/>
-            ))) : <p>No history yet</p>}
+            ))) : <p className="history__text">No history yet</p>}
         </main>
     )
 }
