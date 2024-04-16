@@ -1,0 +1,33 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.nav {
+    width: 100%;
+    display: flex;
+    background-color: $black;
+
+    &__link {
+        @include mobile-nav-link;
+        width: 50%;
+        padding: 1rem 0;
+        text-align: center;
+        text-decoration: none;
+        color: $tracker-purple;
+        transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+
+        &:hover {
+            color: $white;
+            width: 55%;
+        }
+
+        &:first-of-type {
+            border-right: 1px solid $tracker-purple;
+        }
+    }
+}
+
+.active {
+    background-color: $tracker-purple;
+    color: $white;
+}
+

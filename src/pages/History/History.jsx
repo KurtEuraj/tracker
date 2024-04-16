@@ -10,7 +10,6 @@ function History() {
             const storageHistoryIDs = sessionStorage.getItem("historyIDs") || null
             const historyIDs = storageHistoryIDs?.split(",")
             const filteredIDs = historyIDs?.filter((id) => id !== "")
-            console.log(filteredIDs)
             setHistory(filteredIDs)
         }
         getHistory()
