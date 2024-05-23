@@ -7,14 +7,10 @@ function Home() {
 
     const [song, setSong] = useState({})
     const [searchResults, setSearchResults] = useState([])
+    const [showResults, setShowResults] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [query, setQuery] = useState("")
     const [savedQuery, setSavedQuery] = useState("")
-
-    const handleSongsSuggestion = (result) => {
-        const searchStr = `${result.song} by ${result.artists}`
-        setQuery(searchStr)
-    }
 
     const updateHistory = (songName, songId) => {
         let history = sessionStorage.getItem("history") || ""
@@ -27,6 +23,7 @@ function Home() {
 
     const updateSearchTerm = async (e) => {
         setQuery(e.target.value)
+        setShowResults(true)
         if (query) {
             const reqBody = {
                 search: e.target.value
@@ -36,12 +33,14 @@ function Home() {
         }
     }
 
-    const handleSearch = async (e) => {
-        e.preventDefault()
+    const handleSongsSuggestion = async (result) => {
+        const searchStr = `${result.song} by ${result.artists}`
+        setShowResults(false)
+        setQuery(searchStr)
         setIsLoading(true)
         setSong({})
-        const songToSearch = e.target.song.value
-        setSavedQuery(songToSearch)
+        const songToSearch = searchStr
+        setSavedQuery(searchStr)
         const reqBody = {
             song: songToSearch,
             history: sessionStorage.getItem("history") || ""
@@ -67,7 +66,7 @@ function Home() {
 
     return (
         <main>
-            <Hero handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query} />
+            <Hero updateSearchTerm={updateSearchTerm} searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} query={query} showResults={showResults} />
             <SongsList song={song} isLoading={isLoading} savedQuery={savedQuery} handleNextSong={handleNextSong} />
         </main>
     );
