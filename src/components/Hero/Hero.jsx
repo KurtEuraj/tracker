@@ -2,11 +2,11 @@ import "./Hero.scss"
 import SearchBar from "../SearchBar/SearchBar"
 import SearchSuggestions from "../SearchSuggestions/SearchSuggestions"
 
-function Hero({ handleSearch, updateSearchTerm, searchResults, handleSongsSuggestion, query }) {
+function Hero({ updateSearchTerm, searchResults, handleSongsSuggestion, query, showResults }) {
   return (
     <div className="hero">
-      <SearchBar handleSearch={handleSearch} updateSearchTerm={updateSearchTerm} query={query} />
-      {(query.length > 0) ? <SearchSuggestions searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} /> : null}
+      <SearchBar updateSearchTerm={updateSearchTerm} query={query} />
+      {(query.length > 0 && showResults) ? <SearchSuggestions searchResults={searchResults} handleSongsSuggestion={handleSongsSuggestion} /> : null}
     </div>
   )
 }
